@@ -2,7 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <BaseOutputPath Condition="'$(WithDot)' == 'True'">./bin/</BaseOutputPath>
+    <DefaultItemExcludes Condition="'$(WithDot)' == 'True'">$(DefaultItemExcludes);./Data/**</DefaultItemExcludes>
+    <DefaultItemExcludes Condition="'$(WithDot)' != 'True'">$(DefaultItemExcludes);Data/**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <Target Name="DisplayNone" AfterTargets="CoreBuild">
+    <Message Importance="High" Text="None Items : '@(None)'" />
+  </Target>
 
 </Project>
